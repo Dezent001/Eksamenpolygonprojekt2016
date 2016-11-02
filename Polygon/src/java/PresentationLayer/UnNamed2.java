@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LogikLag;
+package PresentationLayer;
 
 /**
  *
  * @author Rune
  */
-public class PolygonException extends Exception {
-   public PolygonException (String msg) {
-      super(msg);
-      
-  }
+public class UnNamed2 {
+    
 }
