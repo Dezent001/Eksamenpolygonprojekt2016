@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Opret en Bygning POLYGON</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <form id="buildingForm" action="#" method="POST">
+                        Address <br> <input type="text" name="Adrasse" value="" /> <br>
+                        Type in square Meters <input type="number" name="M2" value=""/> <br>
+                        Type in The Number of Floors <input type="number" name="Floor" value=""/><br>
+                        Type in the Zipcode<input type="number" name="Zip" value=""/><br>
+
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                            Select image to upload:
+                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="submit" value="Submit All" />
+                        </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
