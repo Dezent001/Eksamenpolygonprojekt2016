@@ -16,7 +16,7 @@ public class Connector {
     private static PreparedStatement stmt;
     private final String HOST     = "46.101.126.94";
     private final int    PORT     = 3306;
-    private final String DATABASE = "polygonMySQL";
+    private final String DATABASE = "polygon";
     private final String USERNAME = "root"; 
     private final String PASSWORD = "bookworm#17laesehest";
   

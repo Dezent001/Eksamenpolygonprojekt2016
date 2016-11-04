@@ -1,6 +1,9 @@
 package buildings;
 
 //import dbaccess.DBFacade;
+import LogikLag.Building;
+import DataLag.DBFacade;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -11,16 +14,16 @@ import java.util.List;
  */
 public class DomainFacade {
 
-    public static List<Building> getBuildings() {
+    public static List<Building> getBuildings() throws SQLException, ClassNotFoundException {
         //return Generator.randomBuildings(100);
         return DBFacade.getBuildings();
     }
 
-    public static Building getBuilding( int id ) {
+    public static Building getBuilding( int id ) throws ClassNotFoundException {
         return DBFacade.getBuildings( id );
     }
 
-    public static void updateBuilding( Building b ) {
+    public static void updateBuilding( Building b ) throws ClassNotFoundException {
         DBFacade.updateBuilding( b );
     }
 }

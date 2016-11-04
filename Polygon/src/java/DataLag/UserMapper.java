@@ -22,14 +22,15 @@ public class UserMapper {
     // Laver en bruger ud fra input
     public static List <User> getUser(){
        List <User> users = new ArrayList ();
-       String sql = "SELECT * from 'users';";
+       String sql = "SELECT * from users;";
         System.out.println("Negative");
        
        try{
+           System.out.println("etedhg");
            Connector DB = Connector.getInstance();
            Statement stmt = DB.getConnection().createStatement();
            ResultSet res = stmt.executeQuery(sql);
-       
+           
        while(res.next()){
             int buildingID = res.getInt("buildingID");
             int userID = res.getInt("userID");
@@ -37,14 +38,13 @@ public class UserMapper {
             int usertype = res.getInt("usertype");
             String firmName = res.getString("firmName");
             String ContactFirstName = res.getString("ContactFirstName");
-            String ContactLAstName = res.getString("ContactLastName");
+            String ContactLastName = res.getString("ContactLastName");
             String telefon = res.getString("telefon");
             String mail = res.getString("mail");
             int cvr = res.getInt("cvr");
             String gade = res.getString("gade");
             String password = res.getString("password");
-            User user = new User( buildingID,userID,zipID,usertype,firmName,ContactFirstName,ContactLAstName,telefon,mail,cvr,gade,password);
-            user.setUserID(res.getInt("userID"));
+            User user = new User( buildingID,userID,zipID,usertype,firmName,ContactFirstName,ContactLastName,telefon,mail,cvr,gade,password);
             users.add(user);
            
        }

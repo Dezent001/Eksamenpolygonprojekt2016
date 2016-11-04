@@ -1,6 +1,6 @@
 package DataLag;
 
-import buildings.Building;
+import LogikLag.Building;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +24,6 @@ public class DBFacade  {
                 Statement stmt = DB.getConnection().createStatement();
                 ResultSet res = stmt.executeQuery(sql);
             while (res.next()) {
-                //int userID, int buildingID, int zip, String street, int size, int floors
                 int userID = res.getInt("userID");
                 int buildingID = res.getInt("buildingID");
                 int zip = res.getInt("zipID");
@@ -50,7 +49,7 @@ public class DBFacade  {
             if (res.next()) {
                 String street = res.getString("street");
                 int zip = res.getInt("zip");
-                return new Building(buildingID, street, zip);
+             //   return new Building(buildingID, street, zip);
             }
         } catch (SQLException ex) {
             System.out.println("Element not gotten: " + ex.getMessage());
@@ -73,9 +72,9 @@ WHERE some_column=some_value;
                 
             
             PreparedStatement stmt = Connector.prepare(sql);
-            stmt.setString(1, b.getAdresse());
+            stmt.setString(1, b.getStreet());
             stmt.setInt(2, b.getM2());
-            stmt.setInt(3, b.getZip());
+            stmt.setInt(3, b.getzipID());
             stmt.setInt(4, b.getFloors());
             stmt.setInt(5, b.getBuildingID());
             int rowsAffected = stmt.executeUpdate();

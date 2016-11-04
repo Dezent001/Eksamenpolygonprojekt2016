@@ -1,5 +1,9 @@
+<%@page import="buildings.DomainFacade"%>
+<%@page import="LogikLag.Building"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
+skrevet af jonas
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -18,14 +22,17 @@ and open the template in the editor.
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body>
-      
+    
+    <%
+    int buildingID = Integer.parseInt( request.getParameter( "buildingid" ) );
+    Building b = DomainFacade.getBuilding( buildingID );
+    %>
         <form action="updateBuilding" method="POST">
             <table>
-                <tr><td>adresse</td><td><input type="text" name="adresse" value="<%=b.setAddress()%>"></td></tr>
-                <tr><td>M2</td><td><input type="text" name="m2" value="<%=b.setm2()%>"></td></tr>
-                <tr><td>Floor</td><td><input type="text" name="floor" value="<%=b.setfloor()%>"></td></tr>
-                <tr><td>zip</td><td><input type="text" name="zip" value="<%=b.setzip()%>"></td></tr>
+                <tr><td>adresse</td><td><input type="text" name="street" value="<%=b.setStreet()%>"></td></tr>
+                <tr><td>M2</td><td><input type="text" name="m2" value="<%=b.setM2()%>"></td></tr>
+                <tr><td>Floor</td><td><input type="text" name="floors" value="<%=b.setFloors()%>"></td></tr>
+                <tr><td>zip</td><td><input type="text" name="zipID" value="<%=b.setzipID()%>"></td></tr>
                 
             </table>
             <input type="hidden" name="id" value="<%=buildingID%>">
@@ -38,5 +45,5 @@ and open the template in the editor.
     <input type="submit" value="Upload Image" name="submit">
 </form>
         <input type="submit" value="Submit All" /> <div>TODO write content</div>
-    </body>
+    
 </html>

@@ -5,10 +5,12 @@
  */
 package PresentationLayer;
 
-import buildings.Building;
+import LogikLag.Building;
 import buildings.DomainFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author kasper
+ * @author Troels
  */
 @WebServlet( name = "updateBuilding", urlPatterns = { "/updateBuilding" } )
 public class UpdateBuilding extends HttpServlet {
@@ -34,7 +36,7 @@ public class UpdateBuilding extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest( HttpServletRequest request, HttpServletResponse response )
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType( "text/html;charset=UTF-8" );
         try ( PrintWriter out = response.getWriter() ) {
             switch ( request.getParameter( "action" ) ) {
@@ -60,7 +62,11 @@ public class UpdateBuilding extends HttpServlet {
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        processRequest( request, response );
+        try {
+            processRequest( request, response );
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateBuilding.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -74,7 +80,11 @@ public class UpdateBuilding extends HttpServlet {
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        processRequest( request, response );
+        try {
+            processRequest( request, response );
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UpdateBuilding.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -93,14 +103,16 @@ public class UpdateBuilding extends HttpServlet {
         rd.forward( req, res );
     }
 
-    private void store( HttpServletRequest request, HttpServletResponse response ) {
+    private void store( HttpServletRequest request, HttpServletResponse response ) throws ClassNotFoundException {
        // int id = Integer.parseInt( request.getParameter( "id" ) );
-        String adresse = request.getParameter( "adresse" );
-        int zip = Integer.parseInt( request.getParameter( "zip" ) );
-        int floor = Integer.parseInt( request.getParameter( "floor" ) );
+        String street = request.getParameter( "street" );
+        int zipID = Integer.parseInt( request.getParameter( "zip" ) );
+        int floors = Integer.parseInt( request.getParameter( "floor" ) );
         int m2 = Integer.parseInt( request.getParameter( "m2" ) );
+        int userID = Integer.parseInt( request.getParameter( "userID" ) );
+        int buildingID = Integer.parseInt( request.getParameter( "buildingID" ) );
         
-        Building b = new Building( adresse, zip, floor, m2 );
+        Building b = new Building(userID,buildingID, zipID, street, m2, floors );
         DomainFacade.updateBuilding( b );
     }
 }

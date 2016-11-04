@@ -29,25 +29,41 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response, List<User> users) throws ServletException, IOException{
         String firmName = request.getParameter("Username");
         String password = request.getParameter("password");
+        int logged_in_type = 0;
         System.out.println("tjekker for brugeren");
         
         if (firmName.length() > 0 && password.length() > 0) {
             for (User user : users) {
                 if (user.getFirmName().equals(firmName) && user.getPassword().equals(password)) {
+                    logged_in_type = user.getUsertype();
                     request.getSession().setAttribute("Username", firmName);
+                    request.getSession().setAttribute("logged_in_type", user.getUsertype());
+                    System.out.println("Test0");
                     break;
                 }
             }
         }
-        
-        response.sendRedirect("index.html");
+        System.out.println("Test1");
+        switch (logged_in_type) {
+            case 1:
+                request.getRequestDispatcher("/homePage.html").forward(request, response);
+                break;
+            case 2:
+                request.getRequestDispatcher("/login.html").forward(request, response);
+                break;
+            default:
+                request.getRequestDispatcher("/login.html").forward(request, response);
+                break;
+        }
+ 
     }
 
    
 @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("index.html");
+        System.out.println("Test2");
+        response.sendRedirect("/login.html");
     }
 
     @Override
@@ -60,7 +76,7 @@ public class Login extends HttpServlet {
         } catch (Exception ex) {
             System.out.println("gik i catch (login)");
             request.setAttribute("errorMsg",ex.getMessage());
-            rd = request.getRequestDispatcher("Login");
+            rd = request.getRequestDispatcher("/Login");
             rd.forward(request, response);
         }
     }
